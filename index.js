@@ -19,12 +19,16 @@ mongoose
 
 app.use(express.json());
 
-var indexRouter = require("./routes/index");
-var planRouter = require("./routes/plan");
+const indexRouter = require("./routes/index");
+const planRouter = require("./routes/plan");
+
+const CheckPoint = require("./model/checkPointSchema");
 
 // Without middleware
 app.get("/user", function (req, res) {
-  res.status(200).send("User Page");
+  const newCheckPoint = CheckPoint();
+  newCheckPoint.save();
+  res.status(200).json("DONE");
 });
 
 app.use("/", indexRouter);
