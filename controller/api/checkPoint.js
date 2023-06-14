@@ -1,5 +1,5 @@
-export const CheckPointModel = {
-  CheckPoint: {
+export const CheckpointModel = {
+  Checkpoint: {
     name: null,
     placeDescription: null,
     placeLocation: null,

@@ -1,20 +1,22 @@
 const mongoose = require("mongoose");
+const ObjectId = require("mongodb").ObjectId;
 
-const checkPointSchema = new mongoose.Schema({
-  name: { type: String },
+const checkpointSchema = new mongoose.Schema({
+  name: String,
   placeDescription: String,
   placeLocation: String,
   phoneNumber: String,
   rating: String,
   openingTime: {
-    start: { type: Date },
-    end: { type: Date },
+    start: Date,
+    end: Date,
   },
   planningTime: {
-    start: { type: Date },
-    end: { type: Date },
+    start: Date,
+    end: Date,
   },
+  plan: ObjectId,
 });
 
-var CheckPoint = mongoose.model("CheckPoint", checkPointSchema);
-module.exports = CheckPoint;
+var Checkpoint = mongoose.model("Checkpoint", checkpointSchema);
+module.exports = Checkpoint;
