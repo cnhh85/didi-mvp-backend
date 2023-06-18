@@ -1,4 +1,4 @@
-export const CheckPointModel = {
+module.exports = {
   CheckPoint: {
     name: null,
     placeDescription: null,
