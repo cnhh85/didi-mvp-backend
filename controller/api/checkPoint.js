@@ -1,5 +1,6 @@
-export const CheckpointModel = {
-  Checkpoint: {
+
+module.exports = {
+  CheckPoint: {
     name: null,
     placeDescription: null,
     placeLocation: null,

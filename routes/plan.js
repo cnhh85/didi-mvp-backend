@@ -1,8 +1,27 @@
-var express = require('express');
-var router = express.Router();
+const express = require("express");
+const router = express.Router();
 
-router.get('/', function(req, res, next) {
-  res.json('this is /plan');
-});
+const planController = require("../controller/planController");
+
+router
+  .post("/", (req, res, next) => {
+    planController.createPlan(req, res, next);
+  })
+  .put("/:planId", (req, res, next) => {
+    planController.editPlan(req, res, next);
+  })
+  .get("/:planId", (req, res, next) => {
+    planController.getPlan(req, res, next);
+  })
+  .post("/:planId/changeSchedule", (req, res, next) => {
+    planController.changeSchedule(req, res, next);
+  })
+  .get("/:planId/getSchedule", (req, res, next) => {
+    planController.getSchedule(req, res, next);
+  })
+  .get("/", (req, res, next) => {
+    planController.getAllPlan(req, res, next);
+  })
+  ;
 
 module.exports = router;

@@ -1,4 +1,4 @@
-export const PlanModel = {
+module.exports = {
   Plan: {
     title: null,
     startDate: null,
