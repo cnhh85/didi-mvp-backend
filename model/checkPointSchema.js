@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const ObjectId = require("mongodb").ObjectId;
 
 const checkpointSchema = new mongoose.Schema({
   name: String,
@@ -14,8 +13,7 @@ const checkpointSchema = new mongoose.Schema({
   planningTime: {
     start: Date,
     end: Date,
-  },
-  plan: ObjectId,
+  }
 });
 
 var Checkpoint = mongoose.model("Checkpoint", checkpointSchema);

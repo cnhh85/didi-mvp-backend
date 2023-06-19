@@ -7,6 +7,7 @@ const planSchema = mongoose.Schema({
   location: String,
   planDescription: String,
   imageUrl: String,
+  schedule: [[{ type: mongoose.Schema.Types.ObjectId }]],
 });
 
 var Plan = mongoose.model("Plan", planSchema);
