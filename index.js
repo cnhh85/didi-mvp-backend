@@ -22,7 +22,6 @@ app.use(express.json());
 const indexRouter = require("./routes/index");
 const planRouter = require("./routes/plan");
 
-const CheckPoint = require("./model/checkPointSchema");
 
 // Without middleware
 app.get("/user", function (req, res) {

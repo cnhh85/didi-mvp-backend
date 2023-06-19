@@ -13,7 +13,8 @@ const checkpointSchema = new mongoose.Schema({
   planningTime: {
     start: Date,
     end: Date,
-  }
+  },
+  notes: [String],
 });
 
 var Checkpoint = mongoose.model("Checkpoint", checkpointSchema);

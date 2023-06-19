@@ -1,4 +1,4 @@
-const Checkpoint = require("../model/checkpointSchema");
+const Checkpoint = require("../model/checkpointModel");
 
 module.exports = {
   createCheckpoint: (req, res) => {
