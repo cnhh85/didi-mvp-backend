@@ -96,4 +96,15 @@ module.exports = {
     });
     res.status(200).json("Get schedule");
   },
+  getAllPlan: (req, res, next) => {
+    planService
+      .getAllPlan()
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json("Error: " + err);
+      });
+  },
 };

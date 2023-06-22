@@ -11,4 +11,7 @@ module.exports = {
   editPlan: (id, data) => {
     return PlanModel.findByIdAndUpdate(id, data);
   },
+  getAllPlan: () => {
+    return PlanModel.find();
+  },
 };
