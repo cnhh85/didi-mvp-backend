@@ -18,6 +18,7 @@ mongoose
   .catch((err) => console.error(err));
 
 app.use(express.json());
+app.set("view engine", "pug");
 
 const indexRouter = require("./routes/index");
 const planRouter = require("./routes/plan");

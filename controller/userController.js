@@ -63,7 +63,7 @@ module.exports = {
     userService
       .editUser(req.params.userId, { isPremium: true })
       .then((result) => {
-        res.status(200).json("Success");
+        res.render("index");
       })
       .catch((err) => {
         console.log(err);
