@@ -21,7 +21,7 @@ app.use(express.json());
 
 const indexRouter = require("./routes/index");
 const planRouter = require("./routes/plan");
-
+const userRouter = require("./routes/user");
 
 // Without middleware
 app.get("/user", function (req, res) {
@@ -32,6 +32,7 @@ app.get("/user", function (req, res) {
 
 app.use("/", indexRouter);
 app.use("/plan", planRouter);
+app.use("/user", userRouter);
 
 app.listen(PORT, function (err) {
   if (err) console.log(err);

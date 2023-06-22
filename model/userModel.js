@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const planSchema = mongoose.Schema({
+const userSchema = mongoose.Schema({
   name: String,
   age: Number,
   gender: {
@@ -13,8 +13,8 @@ const planSchema = mongoose.Schema({
   avatar: String,
   bio: String,
   isPremium: { type: Boolean, default: false },
-  plans: [[{ type: mongoose.Schema.Types.ObjectId }]],
+  users: [[{ type: mongoose.Schema.Types.ObjectId }]],
 });
 
-var Plan = mongoose.model("Plan", planSchema);
-module.exports = Plan;
+var User = mongoose.model("User", userSchema);
+module.exports = User;
