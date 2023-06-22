@@ -14,4 +14,7 @@ module.exports = {
   getAllUser: () => {
     return UserModel.find();
   },
+  authUser: (email, password) => {
+    return UserModel.findOne({ email: email, password: password });
+  },
 };
