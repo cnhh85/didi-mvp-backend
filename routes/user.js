@@ -21,6 +21,9 @@ router
   })
   .post("/:userId/upgradeToPremium", (req, res, next) => {
     userController.upgradeToPremium(req, res, next);
+  })
+  .post("/:userId/requestUpgradePremium", (req, res, next) => {
+    userController.requestUpgrade(req, res, next);
   });
 
 module.exports = router;

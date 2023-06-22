@@ -1,4 +1,21 @@
 const userService = require("../service/userService");
+const nodemailer = require("nodemailer");
+
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: "cnhhiep85@gmail.com",
+    pass: "aspolhrasmfioihm",
+  },
+});
+
+let mailOptions = {
+  from: "cnhhiep85@gmail.com",
+  to: "",
+  subject: "Successfully upgrade to premium!",
+  text: "Please click on the link to activate premium: ",
+};
+
 module.exports = {
   createUser: (req, res, next) => {
     userService
@@ -64,6 +81,30 @@ module.exports = {
       .editUser(req.params.userId, { isPremium: true })
       .then((result) => {
         res.render("index");
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json("Error: " + err);
+      });
+  },
+  requestUpgrade: (req, res, next) => {
+    userService
+      .getUser(req.params.userId)
+      .then((result) => {
+        mailOptions.to = result.email;
+        mailOptions.text =
+          "Please click on the link to activate premium: localhost:3000/user/" +
+          req.params.userId +
+          "/upgradeToPremium";
+        transporter.sendMail(mailOptions, function (error, info) {
+          if (error) {
+            console.log(error);
+            res.status(500).json("Error: " + error);
+          } else {
+            console.log("Email sent: " + info.response);
+            res.status(200).json("Email sent: " + info.response);
+          }
+        });
       })
       .catch((err) => {
         console.log(err);
