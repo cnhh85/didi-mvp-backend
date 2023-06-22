@@ -19,7 +19,7 @@ router
   .post("/:userId/changePlanList", (req, res, next) => {
     userController.changePlanList(req, res, next);
   })
-  .get("/:userId/upgradeToPremium", (req, res, next) => {
+  .post("/:userId/upgradeToPremium", (req, res, next) => {
     userController.upgradeToPremium(req, res, next);
   });
 

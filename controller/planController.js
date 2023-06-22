@@ -28,7 +28,7 @@ module.exports = {
     planService
       .editPlan(req.params.planId, req.body)
       .then((result) => {
-        res.status(200).json(result);
+        res.status(200).json("Edited: " + result._id);
       })
       .catch((err) => {
         console.log(err);

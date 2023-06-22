@@ -29,7 +29,7 @@ module.exports = {
     userService
       .editUser(req.params.userId, data)
       .then((result) => {
-        res.status(200).json(result);
+        res.status(200).json("Edited: " + result._id);
       })
       .catch((err) => {
         console.log(err);
@@ -52,7 +52,7 @@ module.exports = {
     userService
       .editUser(req.params.userId, { plans: req.body })
       .then((result) => {
-        res.status(200).json(result);
+        res.status(200).json("Edited: " + result._id);
       })
       .catch((err) => {
         console.log(err);
@@ -63,7 +63,7 @@ module.exports = {
     userService
       .editUser(req.params.userId, { isPremium: true })
       .then((result) => {
-        res.status(200).json(result);
+        res.status(200).json("Success");
       })
       .catch((err) => {
         console.log(err);
