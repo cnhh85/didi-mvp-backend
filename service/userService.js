@@ -1,17 +1,17 @@
-const userModel = require("../model/userModel");
+const UserModel = require("../model/userModel");
 
 module.exports = {
-  createPlan: (data) => {
-    const planModel = new PlanModel(data);
-    return planModel.save();
+  createUser: (data) => {
+    const userModel = new UserModel(data);
+    return userModel.save();
   },
-  getPlan: (id) => {
-    return PlanModel.findById(id);
+  getUser: (id) => {
+    return UserModel.findById(id);
   },
-  editPlan: (id, data) => {
-    return PlanModel.findByIdAndUpdate(id, data);
+  editUser: (id, data) => {
+    return UserModel.findByIdAndUpdate(id, data);
   },
-  getAllPlan: () => {
-    return PlanModel.find();
+  getAllUser: () => {
+    return UserModel.find();
   },
 };
