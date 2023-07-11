@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema({
   avatar: String,
   bio: String,
   isPremium: { type: Boolean, default: false },
-  plans: [[{ type: mongoose.Schema.Types.ObjectId }]],
+  plans: [{ type: mongoose.Schema.Types.ObjectId }],
 });
 
 var User = mongoose.model("User", userSchema);
