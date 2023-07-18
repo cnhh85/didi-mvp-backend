@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const checkpointSchema = new mongoose.Schema({
+  imageUrl: String,
   name: String,
   placeDescription: String,
   placeLocation: String,

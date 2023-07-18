@@ -1,4 +1,4 @@
-const UserModel = require("../model/userModel");
+const UserModel = require('../model/userModel');
 
 module.exports = {
   createUser: (data) => {
@@ -8,13 +8,28 @@ module.exports = {
   getUser: (id) => {
     return UserModel.findById(id);
   },
-  editUser: (id, data) => {
-    return UserModel.findByIdAndUpdate(id, data);
+  editUser: async (id, data) => {
+    await UserModel.findByIdAndUpdate(id, data);
+    const newUser = await UserModel.findById(id);
+    return newUser;
   },
   getAllUser: () => {
     return UserModel.find();
   },
-  authUser: (email, password) => {
-    return UserModel.findOne({ email: email, password: password });
+  authUser: async (email, password) => {
+    const promise = await UserModel.findOne({
+      email: email,
+      password: password,
+    }).exec();
+    // console.log(promise)
+    return promise;
+  },
+  updateUserAfterDeletingPlan: async (planId, userId) => {
+    const user = await UserModel.findById(userId);
+    if (user && user.plans) {
+      const index = user.plans.indexOf(planId);
+      user.plans.splice(index, 1);
+      await user.save();
+    }
   },
 };

@@ -1,41 +1,43 @@
-const express = require("express");
+const express = require('express');
 const app = express();
 const PORT = 3000;
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 const url =
-  "mongodb+srv://hype:hJ2zVlaAl8Ab9Oxk@hipe.k5mjx4n.mongodb.net/?retryWrites=true&w=majority";
+  'mongodb+srv://hype:hJ2zVlaAl8Ab9Oxk@hipe.k5mjx4n.mongodb.net/?retryWrites=true&w=majority';
 
 mongoose
   .connect(url, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    dbName: "didi-v1",
+    dbName: 'didi-v1',
   })
   .then(() => {
-    console.log("Connected to the Database.");
+    console.log('Connected to the Database.');
   })
   .catch((err) => console.error(err));
 
 app.use(express.json());
-app.set("view engine", "pug");
+app.set('view engine', 'pug');
 
-const indexRouter = require("./routes/index");
-const planRouter = require("./routes/plan");
-const userRouter = require("./routes/user");
+const indexRouter = require('./routes/index');
+const planRouter = require('./routes/plan');
+const userRouter = require('./routes/user');
+const attractionRouter = require('./routes/attraction');
 
 // Without middleware
-app.get("/user", function (req, res) {
-  const newCheckPoint = CheckPoint();
-  newCheckPoint.save();
-  res.status(200).json("DONE");
-});
+// app.get("/user", function (req, res) {
+//   const newCheckPoint = CheckPoint();
+//   newCheckPoint.save();
+//   res.status(200).json("DONE");
+// });
 
-app.use("/", indexRouter);
-app.use("/plan", planRouter);
-app.use("/user", userRouter);
+app.use('/', indexRouter);
+app.use('/plan', planRouter);
+app.use('/user', userRouter);
+app.use('/attraction', attractionRouter);
 
 app.listen(PORT, function (err) {
   if (err) console.log(err);
-  console.log("Server listening on PORT", PORT);
+  console.log('Server listening on PORT', PORT);
 });

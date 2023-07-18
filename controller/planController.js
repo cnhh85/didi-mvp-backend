@@ -1,16 +1,17 @@
-const planService = require("../service/planService");
-const checkpointService = require("../service/checkpointService");
+const planService = require('../service/planService');
+const checkpointService = require('../service/checkpointService');
+const userService = require('../service/userService');
 module.exports = {
   createPlan: (req, res, next) => {
     planService
       .createPlan(req.body)
       .then((result) => {
-        console.log(result);
-        res.status(200).json("Created: " + result._id);
+        // console.log(result);
+        res.status(200).json({ id: result._id });
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).json("Error: " + err);
+        res.status(500).json('Error: ' + err);
       });
   },
   getPlan: (req, res, next) => {
@@ -21,18 +22,18 @@ module.exports = {
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).json("Error: " + err);
+        res.status(500).json('Error: ' + err);
       });
   },
   editPlan: (req, res, next) => {
     planService
       .editPlan(req.params.planId, req.body)
       .then((result) => {
-        res.status(200).json("Edited: " + result._id);
+        res.status(200).json('Edited: ' + result._id);
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).json("Error: " + err);
+        res.status(500).json('Error: ' + err);
       });
   },
   changeSchedule: async (req, res, next) => {
@@ -69,12 +70,12 @@ module.exports = {
           res.status(200).json(result);
         })
         .catch((err) => {
-          res.status(500).json("Error: " + err);
+          res.status(500).json('Error: ' + err);
         });
     });
   },
   getSchedule: async (req, res, next) => {
-    console.log("Receive: " + req.params.planId);
+    console.log('Receive: ' + req.params.planId);
     const planId = req.params.planId;
     let currentPlant;
     let results = [];
@@ -94,7 +95,7 @@ module.exports = {
     await Promise.all(promises).then(() => {
       res.status(200).json(results);
     });
-    res.status(200).json("Get schedule");
+    // res.status(200).json("Get schedule");
   },
   getAllPlan: (req, res, next) => {
     planService
@@ -104,7 +105,47 @@ module.exports = {
       })
       .catch((err) => {
         console.log(err);
-        res.status(500).json("Error: " + err);
+        res.status(500).json('Error: ' + err);
       });
+  },
+  getAllPlanFromUser: (req, res, next) => {
+    const userId = req.params.userId;
+
+    planService
+      .getAllPlanFromUser(userId)
+      .then((result) => {
+        res.status(200).json(result);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.status(500).json('Error: ' + err);
+      });
+  },
+  createAndAddAttractionToSchedule: async (req, res, next) => {
+    try {
+      const planId = req.params.planId;
+      const { dayIndex, data } = req.body;
+      const newPlan = await planService.createAndAddAttractionToSchedule(
+        planId,
+        data,
+        dayIndex
+      );
+      res.status(201).json(newPlan);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+  },
+  delete: async (req, res, next) => {
+    try {
+      const { planId } = req.params;
+      const { userId } = req.body;
+      await planService.deleteOne(planId);
+      await userService.updateUserAfterDeletingPlan(planId, userId);
+      res.status(200).json({ isSuccessful: true, userId: userId });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ error: err });
+    }
   },
 };

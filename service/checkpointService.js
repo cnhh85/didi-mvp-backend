@@ -1,4 +1,4 @@
-const CheckpointModel = require("../model/checkpointModel");
+const CheckpointModel = require('../model/checkpointModel');
 
 module.exports = {
   deleteCheckpoints: (ids) => {
@@ -13,5 +13,17 @@ module.exports = {
   },
   findMany: (ids) => {
     return CheckpointModel.find({ _id: { $in: ids } });
+  },
+  findAll: () => {
+    return CheckpointModel.find();
+  },
+  findOne: (id) => {
+    return CheckpointModel.findById(id);
+  },
+  updateOne: (id, data) => {
+    return CheckpointModel.findByIdAndUpdate(id, data);
+  },
+  deleteOne: (id) => {
+    return CheckpointModel.deleteOne({ _id: id });
   },
 };
